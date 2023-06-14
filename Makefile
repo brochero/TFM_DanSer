@@ -93,7 +93,7 @@ BDTNanoValidation.exe: BDTNanoValidation.cc includes/NanoAODReader.h includes/Na
 	plugins/CreateCollections.o \
 	plugins/MuonSel.o plugins/ElectronSel.o plugins/JetSel.o \
 	plugins/BTagCalibrationStandalone.o plugins/JetbtagCSVSF.o \
-	`root-config --libs --cflags` -I`root-config --incdir` -Wl,-rpath ${ROOTSYS}/lib -lMathCore -lMinuit -lGenVector -Iincludes
+	`root-config --libs --cflags` -I`root-config --incdir` -Wl,-rpath ${ROOTSYS}/lib -lMathCore -lMinuit -lGenVector -Iincludes -lTMVA
 
 # Studies at GEN level
 NanoGenFracVal.exe: NanoGenFracVal.cc includes/NanoAODReader.h includes/NanoAnalyzer.h includes/ObjectsDef.h plugins/NanoAODReader.o plugins/GetListOfFiles.o 

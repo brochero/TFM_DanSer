@@ -8,7 +8,7 @@
 #include "TMVA/Factory.h"
 #include "TMVA/Tools.h"
 #include "TMVA/TMVAGui.h"
-#include "weights_TrFullStataMCatNLORegFrom2_WithDR-v6/TMVAClassification_BDT.class.C"
+#include "TMVA/Reader.h"
 
 #include "TEfficiency.h"
 #include "TProfile.h" 
@@ -397,19 +397,18 @@ int main(int argc, const char* argv[]){
     // MVA
     // Create a vector with the name of the variables used in the training
     // That is the way to identify all the variables involved.
-    std::vector<std::string> inputVariableNames;
-    inputVariableNames.push_back("j_Deep");
-    // DPhi trainning
-    inputVariableNames.push_back("DpT_jmet");
-    inputVariableNames.push_back("Deta_lj");
-    //inputVariableNames.push_back("M_lj");
-    inputVariableNames.push_back("DR_lj");
+    float var1, var2, var3, var4, var5;
+    int spec1; float spec2;
 
-    // Mass trainning
-    // inputVariableNames.push_back("Deta_lj");
-    // inputVariableNames.push_back("DpT_jmet");
-    //inputVariableNames.push_back("Dphi_lj");
-    IClassifierReader *classReader = new ReadBDT(inputVariableNames);
+    // Method to calculate the BDT response
+    TMVA::Reader *Reader = new TMVA::Reader( "!Color:!Silent" );
+    Reader->AddVariable ( "j_Deep",   &var1 );
+    Reader->AddVariable ( "DpT_jmet", &var2 );
+    Reader->AddVariable ( "Deta_lj",  &var3 );
+    Reader->AddVariable ( "DR_lj",    &var4 );
+    Reader->AddSpectator( "spec1 := M_lj",     &spec1 );
+    Reader->AddSpectator( "spec2 := region",   &spec2 );
+    Reader->BookMVA("BDT",  "includes/weights_TrFullStataMCatNLORegFrom2_WithDR-v6/TMVAClassification_BDT.weights.xml");
 
     // Evt Loop
     for (Long64_t iEvt=0; iEvt<NTreeEvtToRun; iEvt++) {
@@ -551,22 +550,13 @@ int main(int argc, const char* argv[]){
 	// Mass
       	float M_lj = (ijet+SeleLepton).M();
 
-      	// - Create a vector with the variables used in the BDT.
-      	// - The order must be the same that the one used in the classReader definition.
-      	// [0] "j_Deep",   [1] "DpT_jmet", 
-      	// [2] "Deta_lj",  [3] "DR_lj"     [5] "M_lj"
-      	std::vector<double> inputVariableValues;
-      	inputVariableValues.push_back(jetbtag);
-	// DPhi trainning
-      	inputVariableValues.push_back(DpT_METj);
-      	inputVariableValues.push_back(Deta_lj);
-      	//inputVariableValues.push_back(M_lj);
-      	inputVariableValues.push_back(DR_lj);
-	// Mass trainning
-      	// inputVariableValues.push_back(Deta_lj);
-      	// inputVariableValues.push_back(DpT_METj);
-      	//inputVariableValues.push_back(DPhi_lj);
-      	double BDTResponse  = classReader->GetMvaValue(inputVariableValues);
+
+	var1 = jetbtag;
+	var2 = DpT_METj;
+	var3 = Deta_lj;
+	var4 = DR_lj;
+
+      	double BDTResponse  = Reader->EvaluateMVA("BDT");
 	
 	BDTs.push_back(BDTResponse);
 
@@ -717,7 +707,7 @@ int main(int argc, const char* argv[]){
 	
     } // for (iEvent)
     
-    delete classReader;
+    delete Reader;
     
     InputFile->Close();
     delete InputFile;
