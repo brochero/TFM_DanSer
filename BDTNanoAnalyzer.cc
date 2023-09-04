@@ -323,7 +323,7 @@ int main(int argc, const char *argv[])
   // ---------------------------------------------------------------
 
   TTree *tree_R, *tree_W;
-  int recoregion, ch_evt;
+  int region, ch_evt;
   float j_pT, j_Deep, j_eta, l_pT, l_eta, DR_lj, Deta_lj, DPhi_lj, DpT_metj, M_lj;
   float W_evt, Deta_lmet, DpT_lj, DR_metj, DPhi_metj; //Dphi_lmet,DR_metjb
 
@@ -332,7 +332,7 @@ int main(int argc, const char *argv[])
 
   tree_R->Branch("W_evt", &W_evt, "W_evt/F");
   tree_R->Branch("ch_evt", &ch_evt, "channel/I");
-  tree_R->Branch("region", &recoregion, "region/I");
+  tree_R->Branch("region", &region, "region/I");
 
   tree_R->Branch("j_pT", &j_pT, "j_pT/F");
   tree_R->Branch("j_Deep", &j_Deep, "j_Deep/F");
@@ -361,7 +361,7 @@ int main(int argc, const char *argv[])
 
   tree_W->Branch("W_evt", &W_evt, "W_evt/F");
   tree_W->Branch("ch_evt", &ch_evt, "channel/I");
-  tree_W->Branch("region", &recoregion, "region/I");
+  tree_W->Branch("region", &region, "region/I");
 
   tree_W->Branch("j_pT", &j_pT, "j_pT/F");
   tree_W->Branch("j_Deep", &j_Deep, "j_Deep/F");
@@ -763,7 +763,7 @@ int main(int argc, const char *argv[])
         // Tree variables
         W_evt = event_weight;
         ch_evt = ichannel;
-        recoregion = sel;
+        region = sel;
 
         j_pT = ijet.Pt();
         j_Deep = ijet.DeepCSV;
@@ -776,12 +776,12 @@ int main(int argc, const char *argv[])
         DpT_metj = ijet.Pt() - MET.Pt();
         DPhi_lj = ijet.DeltaPhi(SeleLepton);
 
-        Deta_lmet = (SeleLepton-MET).Eta();
+        Deta_lmet = SeleLepton.Eta()-MET.Eta();
 
         //Dphi_lmet = SeleLepton.DeltaPhi(MET);
         //DR_metj = ijet.DeltaR(MET);
 
-        DpT_lj = (ijet - SeleLepton).Pt();
+        DpT_lj = ijet.Pt() - SeleLepton.Pt();
         DR_metj = ijet.DeltaR(MET);
         DPhi_metj = ijet.DeltaPhi(MET);
         //Et_met = MET.Et();

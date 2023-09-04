@@ -38,3 +38,7 @@ Thumbs.db
 
 #Root files
 *.root
+
+#Images and Documents
+*.pdf
+*.png
