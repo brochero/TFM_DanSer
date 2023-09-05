@@ -84,7 +84,7 @@ BDTNanoAnalyzer.exe: BDTNanoAnalyzer.cc includes/NanoAODReader.h includes/NanoAn
 	plugins/CreateCollections.o \
 	plugins/MuonSel.o plugins/ElectronSel.o plugins/JetSel.o \
 	plugins/BTagCalibrationStandalone.o plugins/JetbtagCSVSF.o \
-	`root-config --libs --cflags` -I`root-config --incdir` -Wl,-rpath ${ROOTSYS}/lib -lMathCore -lMinuit -lGenVector -Iincludes
+	`root-config --libs --cflags` -I`root-config --incdir` -Wl,-rpath ${ROOTSYS}/lib -lMathCore -lMinuit -lGenVector -Iincludes -lPyMVA
 
 # BDT Performance 
 BDTNanoValidation.exe: BDTNanoValidation.cc includes/NanoAODReader.h includes/NanoAnalyzer.h includes/ObjectsDef.h plugins/NanoAODReader.o plugins/GetListOfFiles.o plugins/SFLumi.o plugins/SFLepIDISOTr.o plugins/CreateCollections.o plugins/MuonSel.o plugins/ElectronSel.o plugins/JetSel.o plugins/BTagCalibrationStandalone.o plugins/JetbtagCSVSF.o
@@ -93,7 +93,7 @@ BDTNanoValidation.exe: BDTNanoValidation.cc includes/NanoAODReader.h includes/Na
 	plugins/CreateCollections.o \
 	plugins/MuonSel.o plugins/ElectronSel.o plugins/JetSel.o \
 	plugins/BTagCalibrationStandalone.o plugins/JetbtagCSVSF.o \
-	`root-config --libs --cflags` -I`root-config --incdir` -Wl,-rpath ${ROOTSYS}/lib -lMathCore -lMinuit -lGenVector -Iincludes -lTMVA
+	`root-config --libs --cflags` -I`root-config --incdir` -Wl,-rpath ${ROOTSYS}/lib -lMathCore -lMinuit -lGenVector -Iincludes -lTMVA -lPyMVA
 
 # Studies at GEN level
 NanoGenFracVal.exe: NanoGenFracVal.cc includes/NanoAODReader.h includes/NanoAnalyzer.h includes/ObjectsDef.h plugins/NanoAODReader.o plugins/GetListOfFiles.o 

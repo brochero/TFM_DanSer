@@ -487,7 +487,7 @@ int main(int argc, const char* argv[]){
 
     //PyKeras
     //We call PyKeras in TMVA, needed to have PyKeras available as a method in TMVA
-    //TMVA::PyMethodBase::PyInitialize();
+    TMVA::PyMethodBase::PyInitialize();
   
     // Method to calculate the BDT response
     TMVA::Reader *Reader = new TMVA::Reader( "!Color:!Silent" );
@@ -671,7 +671,7 @@ int main(int argc, const char* argv[]){
 	
 	      BDTs.push_back(BDTResponse);
 
-        //TMVA::PyMethodBase::PyFinalize();
+        TMVA::PyMethodBase::PyFinalize();
 
       	// Lepton-Jet with the highest BDT response
       	if (BDTResponse > jBDT){
