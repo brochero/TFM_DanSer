@@ -51,6 +51,7 @@ int main(int argc, const char *argv[])
 
   gSystem->Load("libTree");
   gROOT->ProcessLine("#include <vector>");
+  
 
   double _NUserEvt = 0;
   const char *_output = "Histos";
@@ -60,7 +61,8 @@ int main(int argc, const char *argv[])
   const char *_fraction = "none";     // W-Helicity fraction for top samples
   const char *_cmssw = "";            // CMSSW path
   const char *_FromOutside = "";
-  const char *_ghist = "none";
+  //const char *_ghist = "none";
+  const char *_ghist = "/gpfs/users/sernad/TFM_DanSer/CMSSW_12_0_0/src/TFM_DanSer/inputs/tree_64.root.hist";
 
   // Arguments used
   // Parsing input options
@@ -451,7 +453,7 @@ int main(int argc, const char *argv[])
   for (int ifile = 0; ifile < InputNameFiles.size(); ifile++)
   {
 
-    TFile *InputFile = TFile::Open(InputNameFiles.at(ifile), "readonly");
+    TFile *InputFile = TFile::Open("/gpfs/users/sernad/TFM_DanSer/CMSSW_12_0_0/src/TFM_DanSer/inputs/tree_64.root", "readonly");
     std::cout << "Reading " + InputNameFiles.at(ifile) << std::endl;
 
     NanoAOD *SkimTree;
