@@ -480,7 +480,7 @@ int main(int argc, const char* argv[]){
     // Create a vector with the name of the variables used in the training
     // That is the way to identify all the variables involved.
     float var1, var2, var3, var4, var5, var6, var7, var8, var9;
-    //int spec1; float spec2;
+    int spec1; float spec2;
     TMVA::Tools::Instance();
 
     std::cout << "Setup TMVA..." << std::endl;
@@ -501,10 +501,10 @@ int main(int argc, const char* argv[]){
     Reader->AddVariable ( "DpT_lj",    &var7 );
     Reader->AddVariable ( "DR_metj",   &var8 );
     Reader->AddVariable ( "DPhi_metj", &var9 );
-    //Reader->AddSpectator( "spec1 := M_lj",     &spec1 );
-    //Reader->AddSpectator( "spec2 := region",   &spec2 );
+    Reader->AddSpectator( "region",    &spec1 );
+    Reader->AddSpectator( "M_lj",      &spec2 );
     
-    Reader->BookMVA("PyKeras", "Keras/dataset/weights/TMVAClassification_PyKeras.weights.xml");
+    Reader->BookMVA("PyKeras", "dataset/weights/TMVAClassification_PyKeras.weights.xml");
     //Reader->BookMVA("BDT",  "TMVAClassification_BDT.weights.xml");
     //Reader->BookMVA("BDT",  "includes/weights_TrFullStataMCatNLORegFrom2_WithDR-v6/TMVAClassification_BDT.weights.xml");
     
@@ -666,12 +666,14 @@ int main(int argc, const char* argv[]){
         var8 = DR_metj;
         var9 = Dphi_METj;
 
+        spec2 = M_lj;
+
       	double BDTResponse  = Reader->EvaluateMVA("PyKeras");
         //double BDTResponse  = Reader->EvaluateMVA("BDT");
 	
 	      BDTs.push_back(BDTResponse);
 
-        TMVA::PyMethodBase::PyFinalize();
+        //TMVA::PyMethodBase::PyFinalize();
 
       	// Lepton-Jet with the highest BDT response
       	if (BDTResponse > jBDT){

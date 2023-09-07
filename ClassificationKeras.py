@@ -1,12 +1,11 @@
 #from os import environ
 #environ['KERAS_BACKEND'] = 'tensorflow'
-"""
+
 from ROOT import TMVA, TFile, TTree, TCut
 from subprocess import call
 from os.path import isfile
 
 import tensorflow.keras
-from keras.utils import np_utils
 
 from tensorflow.keras.backend import *
 
@@ -18,15 +17,6 @@ from tensorflow.keras import regularizers
 
 from tensorflow.keras import callbacks
 from tensorflow.keras.constraints import max_norm
-"""
-from ROOT import TMVA, TFile, TTree, TCut
-from subprocess import call
-from os.path import isfile
-
-from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.optimizers import Adam
-from keras import backend as K
 
 
 # Setup TMVA
@@ -87,7 +77,7 @@ model.summary()
 factory.BookMethod(dataloader, TMVA.Types.kPyKeras, 'PyKeras', 'H:!V:VarTransform=D,G:'+\
                    'FilenameModel=modelClassification.h5:'+\
                    'NumEpochs=100:BatchSize=256:'+\
-                   'TriesEarlyStopping=10:verbose=2')
+                   'TriesEarlyStopping=10:verbose=2:tf.keras=True')
  
 # Run training, test and evaluation
 factory.TrainAllMethods()
