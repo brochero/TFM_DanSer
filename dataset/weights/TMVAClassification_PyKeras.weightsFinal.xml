@@ -4,11 +4,11 @@
     <Info name="TMVA Release" value="4.2.1 [262657]"/>
     <Info name="ROOT Release" value="6.22/09 [398857]"/>
     <Info name="Creator" value="sernad"/>
-    <Info name="Date" value="Mon Sep 11 18:59:01 2023"/>
+    <Info name="Date" value="Mon Sep 11 17:26:45 2023"/>
     <Info name="Host" value="Linux cmsbuild79.cern.ch 3.10.0-1062.4.1.el7.x86_64 #1 SMP Fri Oct 18 17:15:30 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux"/>
     <Info name="Dir" value="/gpfs/users/sernad/TFM_DanSer/CMSSW_12_0_0/src/TFM_DanSer"/>
     <Info name="Training events" value="230515"/>
-    <Info name="TrainingTime" value="1.77273316e+02"/>
+    <Info name="TrainingTime" value="1.36726762e+02"/>
     <Info name="AnalysisType" value="Classification"/>
   </GeneralInfo>
   <Options>
@@ -18,12 +18,12 @@
     <Option name="H" modified="Yes">True</Option>
     <Option name="CreateMVAPdfs" modified="No">False</Option>
     <Option name="IgnoreNegWeightsInTraining" modified="No">False</Option>
-    <Option name="FilenameModel" modified="Yes">modelClassificationGPU.h5</Option>
+    <Option name="FilenameModel" modified="Yes">modelClassification.h5</Option>
     <Option name="FilenameTrainedModel" modified="No">dataset/weights/TrainedModel_PyKeras.h5</Option>
     <Option name="BatchSize" modified="Yes">256</Option>
     <Option name="NumEpochs" modified="Yes">100</Option>
     <Option name="NumThreads" modified="No">0</Option>
-    <Option name="GpuOptions" modified="Yes">allow_growth=True</Option>
+    <Option name="GpuOptions" modified="No"/>
     <Option name="tf.keras" modified="Yes">True</Option>
     <Option name="Verbose" modified="Yes">2</Option>
     <Option name="ContinueTraining" modified="No">False</Option>

@@ -497,14 +497,15 @@ int main(int argc, const char* argv[]){
     Reader->AddVariable ( "Deta_lj",   &var3 );
     Reader->AddVariable ( "DpT_metj",  &var4 );
     Reader->AddVariable ( "DPhi_lj",   &var5 );
-    Reader->AddVariable ( "Deta_lmet", &var6 );
-    Reader->AddVariable ( "DpT_lj",    &var7 );
-    Reader->AddVariable ( "DR_metj",   &var8 );
+
+    //Reader->AddVariable ( "Deta_lmet", &var6 );
+    //Reader->AddVariable ( "DpT_lj",    &var7 );
+    //Reader->AddVariable ( "DR_metj",   &var8 );
     Reader->AddVariable ( "DPhi_metj", &var9 );
     Reader->AddSpectator( "region",    &spec1 );
     Reader->AddSpectator( "M_lj",      &spec2 );
     
-    Reader->BookMVA("PyKeras", "dataset/weights/TMVAClassification_PyKeras.weights.xml");
+    Reader->BookMVA("PyKeras", TString("dataset/weights/TMVAClassification_PyKeras.weights.xml"));
     //Reader->BookMVA("BDT",  "TMVAClassification_BDT.weights.xml");
     //Reader->BookMVA("BDT",  "includes/weights_TrFullStataMCatNLORegFrom2_WithDR-v6/TMVAClassification_BDT.weights.xml");
     
@@ -637,6 +638,7 @@ int main(int argc, const char* argv[]){
       	NMbJets += jetbtag > deepcsvWP_Medium ? 1:0; 
       	NTbJets += jetbtag > deepcsvWP_Tight  ? 1:0;
 
+        int NbJets = NMbJets;  
         // QGL
 	      //float jQGL = ijet.QGL >= 0. ? ijet.QGL:0.; 
 			
@@ -667,6 +669,31 @@ int main(int argc, const char* argv[]){
         var9 = Dphi_METj;
 
         spec2 = M_lj;
+
+        int sel;
+             // Event Selection
+        if (NJets == 2 && NbJets == 1)
+          sel = 0;
+        if (NJets == 2 && NbJets == 2)
+          sel = 1;
+        if (NJets == 3 && NbJets == 1)
+          sel = 2;
+        if (NJets == 3 && NbJets == 2)
+          sel = 3;
+        if (NJets == 3 && NbJets == 3)
+          sel = 4;
+        if (NJets == 4 && NbJets == 1)
+          sel = 5;
+        if (NJets == 4 && NbJets == 2)
+          sel = 6;
+        if (NJets == 4 && NbJets >= 3)
+          sel = 7;
+        if (NJets >= 5)
+          sel = 8;
+        if (NJets >= 5 && NbJets >= 2)
+          sel = 9;
+
+        spec1 = sel;
 
       	double BDTResponse  = Reader->EvaluateMVA("PyKeras");
         //double BDTResponse  = Reader->EvaluateMVA("BDT");
