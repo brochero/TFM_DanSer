@@ -17,13 +17,14 @@ void CreateBDTEfficiencyCurve(TString Cut      = "4j2b",
   // TString Ref = "TrFullStataMCatNLORegFrom2_WithDR-v6";
   // TString inputfile = "../HistoResult/"+Ref+"/"+Ref+"_BDTValidation_SmallFNano2017-v7_TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8.root";
 
-  TString Ref = "ValGenJetNovNoBDTCut-v0";
-  TString inputfile = "../HistoResult/"+Ref+"/"+Ref+"_BDTValidation_GenJetsFNano2017-v7_TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8.root";
+  TString Ref = "Val-BDTG";
+  TString inputfile = "/gpfs/users/sernad/TFM_DanSer/CMSSW_12_0_0/src/TFM_DanSer/HistoResult/"+Ref+"/"+Ref+"_BDTValidation_FNano2017-v7_TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8.root";
   
   TFile *hfile = NULL;
   hfile = TFile::Open(inputfile);
   cout << "file loaded: " << inputfile << endl;
   
+  TString Model = "BDTG";
 
   TH1::SetDefaultSumw2(kTRUE);  
 
@@ -44,38 +45,38 @@ void CreateBDTEfficiencyCurve(TString Cut      = "4j2b",
 
   
   TEfficiency *e_C = new TEfficiency("Eff_" + ((TString)h_C->GetName()),
-				     "Efficiency; BDT Cut; Efficiency",
+				     "Efficiency;"+Model+ "Cut; Efficiency",
 				     h_C->GetNbinsX(),
 				     h_C->GetXaxis()->GetBinLowEdge(0),
 				     h_C->GetXaxis()->GetBinLowEdge(h_C->GetNbinsX()+1));
 
   TEfficiency *e_W = new TEfficiency("Eff_" + ((TString)h_W->GetName()),
-				     "Efficiency; BDT Cut; Efficiency",
+				     "Efficiency; "+Model+ " Cut; Efficiency",
 				     h_W->GetNbinsX(),
 				     h_W->GetXaxis()->GetBinLowEdge(0),
 				     h_W->GetXaxis()->GetBinLowEdge(h_W->GetNbinsX()+1));
 
   TEfficiency *e_CTot = new TEfficiency("EffTot_" + ((TString)h_C->GetName()),
-					"Efficiency; BDT Cut; Efficiency",
+					"Efficiency; "+Model+ " Cut; Efficiency",
 					h_C->GetNbinsX(),
 					h_C->GetXaxis()->GetBinLowEdge(0),
 					h_C->GetXaxis()->GetBinLowEdge(h_C->GetNbinsX()+1));
   
   TEfficiency *e_WTot = new TEfficiency("EffTot_" + ((TString)h_W->GetName()),
-					"Efficiency; BDT Cut; Efficiency",
+					"Efficiency; "+Model+ " Cut; Efficiency",
 					h_W->GetNbinsX(),
 					h_W->GetXaxis()->GetBinLowEdge(0),
 					h_W->GetXaxis()->GetBinLowEdge(h_W->GetNbinsX()+1));
   
 
   TEfficiency *p_C = new TEfficiency("Pur_" + ((TString)h_C->GetName()),
-				     "Purity; BDT Cut; Purity",
+				     "Purity; "+Model+ " Cut; Purity",
 				     h_C->GetNbinsX(),
 				     h_C->GetXaxis()->GetBinLowEdge(0),
 				     h_C->GetXaxis()->GetBinLowEdge(h_C->GetNbinsX()+1));
 
   TEfficiency *p_W = new TEfficiency("Pur_" + ((TString)h_W->GetName()),
-				     "Purity; BDT Cut; Purity",
+				     "Purity; "+Model+ " Cut; Purity",
 				     h_W->GetNbinsX(),
 				     h_W->GetXaxis()->GetBinLowEdge(0),
 				     h_W->GetXaxis()->GetBinLowEdge(h_W->GetNbinsX()+1));
@@ -107,7 +108,7 @@ void CreateBDTEfficiencyCurve(TString Cut      = "4j2b",
 
   }
 
-  float XaxisRange_o = -0.2, XaxisRange_f = 0.5;
+  float XaxisRange_o = -0.1, XaxisRange_f = 1.0;
   
   TCanvas *c0;
   c0 = new TCanvas("Efficiency");
@@ -116,7 +117,7 @@ void CreateBDTEfficiencyCurve(TString Cut      = "4j2b",
 
   TH1 *h_Style = (TH1*)h_C->Clone();  
   h_Style->SetTitle("Efficiency ROC curves for " + Cut);
-  h_Style->GetXaxis()->SetTitle("BDT Cut");
+  h_Style->GetXaxis()->SetTitle(Model + " Cut");
   h_Style->GetYaxis()->SetTitle("Efficiency");
 
   h_Style->GetYaxis()->SetTitleOffset(0.6);

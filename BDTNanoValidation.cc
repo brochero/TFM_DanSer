@@ -487,7 +487,7 @@ int main(int argc, const char* argv[]){
 
     //PyKeras
     //We call PyKeras in TMVA, needed to have PyKeras available as a method in TMVA
-    TMVA::PyMethodBase::PyInitialize();
+    //TMVA::PyMethodBase::PyInitialize();
   
     // Method to calculate the BDT response
     TMVA::Reader *Reader = new TMVA::Reader( "!Color:!Silent" );
@@ -505,8 +505,8 @@ int main(int argc, const char* argv[]){
     Reader->AddSpectator( "region",    &spec1 );
     Reader->AddSpectator( "M_lj",      &spec2 );
     
-    Reader->BookMVA("PyKeras", TString("dataset/weights/TMVAClassification_PyKeras.weights.xml"));
-    //Reader->BookMVA("BDT",  "TMVAClassification_BDT.weights.xml");
+    //Reader->BookMVA("PyKeras", TString("dataset/weights/TMVAClassification_PyKeras.weights.xml"));
+    Reader->BookMVA("BDT",  "weights/TMVAClassification_BDT.weights.xml");
     //Reader->BookMVA("BDT",  "includes/weights_TrFullStataMCatNLORegFrom2_WithDR-v6/TMVAClassification_BDT.weights.xml");
     
     // Evt Loop
@@ -695,8 +695,8 @@ int main(int argc, const char* argv[]){
 
         spec1 = sel;
 
-      	double BDTResponse  = Reader->EvaluateMVA("PyKeras");
-        //double BDTResponse  = Reader->EvaluateMVA("BDT");
+      	//double BDTResponse  = Reader->EvaluateMVA("PyKeras");
+        double BDTResponse  = Reader->EvaluateMVA("BDT");
 	
 	      BDTs.push_back(BDTResponse);
 
