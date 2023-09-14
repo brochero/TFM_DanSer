@@ -43,6 +43,13 @@
         "utility": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "BDTEfficiencies.C": "cpp"
+        "BDTEfficiencies.C": "cpp",
+        "BDTEfficiencies_WithOut_DR.C": "cpp",
+        "BDTEfficiencyCurve.C": "cpp",
+        "BDTResponse.C": "cpp",
+        "BDTEfficiencyMCValCurve.C": "cpp",
+        "BDTEfficienciesDRComparison.C": "cpp",
+        "BDTEfficienciesCutsComparison.C": "cpp",
+        "BDTEfficienciesByRegions.C": "cpp"
     }
 }

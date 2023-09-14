@@ -506,7 +506,7 @@ int main(int argc, const char* argv[]){
     Reader->AddSpectator( "M_lj",      &spec2 );
     
     //Reader->BookMVA("PyKeras", TString("dataset/weights/TMVAClassification_PyKeras.weights.xml"));
-    Reader->BookMVA("BDT",  "weights/TMVAClassification_BDT.weights.xml");
+    Reader->BookMVA("BDTG",  "weightsTMVA/TMVAClassification_BDTG.weights.xml");
     //Reader->BookMVA("BDT",  "includes/weights_TrFullStataMCatNLORegFrom2_WithDR-v6/TMVAClassification_BDT.weights.xml");
     
     // Evt Loop
@@ -696,7 +696,7 @@ int main(int argc, const char* argv[]){
         spec1 = sel;
 
       	//double BDTResponse  = Reader->EvaluateMVA("PyKeras");
-        double BDTResponse  = Reader->EvaluateMVA("BDT");
+        double BDTResponse  = Reader->EvaluateMVA("BDTG");
 	
 	      BDTs.push_back(BDTResponse);
 
